@@ -89,21 +89,24 @@ var seattleCenter = {
 
     numCustomers: function(){
         var totalSales = 0;
+        var salesArray = [];
         for(var i=0; i<hours.length; i++){
             //Generate random # customers between min and max
             var numCookies = getRandomCustomers(this.minHourlyCust, this.maxHourlyCust) * this.avgCustSale;
+            salesArray.push(Math.round(numCookies));
 
             //Create element to hold data
             var liEl = document.createElement('li');
 
             //Assign data to element
-            liEl.textContent = hours[i] + ': ' + Math.round(numCookies) + ' cookies';
+            liEl.textContent = hours[i] + salesArray[i] + ' cookies';
             totalSales = totalSales + Math.round(numCookies);
             console.log('assigned value liEl', liEl);
 
             //Put element into the DOM
             seaCenterUl.appendChild(liEl);
         }
+        salesArray.push(totalSales);
         var liEl = document.createElement('li');
         liEl.textContent = 'Total sales: ' + totalSales + ' cookies';
         seaCenterUl.appendChild(liEl);
@@ -119,21 +122,24 @@ var capitolHill = {
 
     numCustomers: function(){
         var totalSales = 0;
+        var salesArray = [];
         for(var i=0; i<hours.length; i++){
             //Generate random # customers between min and max
             var numCookies = getRandomCustomers(this.minHourlyCust, this.maxHourlyCust) * this.avgCustSale;
+            salesArray.push(Math.round(numCookies));
 
             //Create element to hold data
             var liEl = document.createElement('li');
 
             //Assign data to element
-            liEl.textContent = hours[i] + ': ' + Math.round(numCookies) + ' cookies';
+            liEl.textContent = hours[i] + salesArray[i] + ' cookies';
             totalSales = totalSales + Math.round(numCookies);
             console.log('assigned value liEl', liEl);
 
             //Put element into the DOM
             capHillUl.appendChild(liEl);
         }
+        salesArray.push(totalSales);
         var liEl = document.createElement('li');
         liEl.textContent = 'Total sales: ' + totalSales + ' cookies';
         capHillUl.appendChild(liEl);
@@ -149,21 +155,24 @@ var alki = {
 
     numCustomers: function(){
         var totalSales = 0;
+        var salesArray = [];
         for(var i=0; i<hours.length; i++){
             //Generate random # customers between min and max
             var numCookies = getRandomCustomers(this.minHourlyCust, this.maxHourlyCust) * this.avgCustSale;
+            salesArray.push(Math.round(numCookies));
 
             //Create element to hold data
             var liEl = document.createElement('li');
 
             //Assign data to element
-            liEl.textContent = hours[i] + ': ' + Math.round(numCookies) + ' cookies';
+            liEl.textContent = hours[i] + salesArray[i] + ' cookies';
             totalSales = totalSales + Math.round(numCookies);
             console.log('assigned value liEl', liEl);
 
             //Put element into the DOM
             alkiUl.appendChild(liEl);
         }
+        salesArray.push(totalSales);
         var liEl = document.createElement('li');
         liEl.textContent = 'Total sales: ' + totalSales + ' cookies';
         alkiUl.appendChild(liEl);

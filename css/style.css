@@ -1,0 +1,43 @@
+header{
+    background: lightskyblue;
+    text-align: center;
+}
+
+h1{
+    font-size: 70px;
+    font-family: 'Acme', sans-serif; 
+}
+
+h2{
+    text-align: center;
+    font-size: 20px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+nav{
+    border-top: solid 2px black;
+    border-bottom: solid 2px black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+}
+
+ul{
+    text-align: center;
+}
+
+.navbar{
+    display: inline-block;
+    border: solid 2px black;
+    margin: 5px 100px 5px 100px;
+}
+
+tr{
+    text-align: center;
+    margin: 50px;
+}
+
+.grid{
+    float: left;
+    width: 20%;
+}

@@ -1,16 +1,6 @@
 'use strict';
 
 var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
-
-var headerTr = document.getElementById('tableHead');
-var pikeTr = document.getElementById('pike');
-var seaTacTr = document.getElementById('seatac');
-var seaCenterTr = document.getElementById('seacenter');
-var capHillTr = document.getElementById('caphill');
-var alkiTr = document.getElementById('alki');
-var footerTr = document.getElementById('tableFoot');
-
-var domId = [pikeTr, seaTacTr, seaCenterTr, capHillTr, alkiTr];
 var allStores = [];
 
 //Function creates random number for customers
@@ -45,6 +35,7 @@ new Store('Alki Beach', 2, 16, 4.6);
 
 //Write function to create table header
 function makeHeader(){
+    var headerTr = document.getElementById('tableHead');
     var tdEl = document.createElement('td');
     tdEl.textContent = null;
     headerTr.appendChild(tdEl);
@@ -61,7 +52,7 @@ function makeHeader(){
 makeHeader();
 
 //Write function to create tabular data
-function makeDataTable(){
+/*Store.prototype.render = function(){
     for(var i=0; i<allStores.length; i++){
         var currentStore = allStores[i];
         //Push data to table rows
@@ -79,11 +70,35 @@ function makeDataTable(){
         tdEl.textContent = currentStore.totalSales;
         domId[i].appendChild(tdEl);
     }
+};
+allStores[0].render();*/
+
+Store.prototype.render = function(){
+    //Push data to table rows
+    var tableBody = document.getElementById(this.location);
+    var tdEl = document.createElement('td');
+    tdEl.textContent = this.location;
+    tableBody.appendChild(tdEl);
+    
+    //Populate trEl with data from allStores
+    for(var j=0; j<hours.length; j++){ 
+        tdEl = document.createElement('td');
+        tdEl.textContent = this.hourlySales[j];
+        tableBody.appendChild(tdEl);
+    }
+    tdEl = document.createElement('td');
+    tdEl.textContent = this.totalSales;
+    tableBody.appendChild(tdEl);
+};
+
+//Create loop to render each store
+for(var i=0; i<allStores.length; i++){
+    allStores[i].render();
 }
-makeDataTable();
 
 //Write function to create footer
 function makeFooter(){
+    var footerTr = document.getElementById('tableFoot');
     var dailyTotal = 0;
     var tdEl = document.createElement('td');
     tdEl.textContent = 'Totals';
@@ -271,4 +286,4 @@ var alki = {
         alkiUl.appendChild(liEl);
     }
 };
-alki.numCustomers(); */
+alki.numCustomers();*/

@@ -54,9 +54,26 @@ img{
     margin-bottom: 10px;
 }
 
+table{
+    border: 5px solid black;
+    margin: 10px auto 10px auto;
+    max-width: 100%;
+    max-height: 100%;
+}
 tr{
     text-align: center;
     margin: 50px;
+    color: black;
+    background-color:lightblue;
+}
+
+td{
+    padding: 5px;
+    border: 2px solid black;
+}
+
+.tableHead{
+    font-weight: bold;
 }
 
 .grid{

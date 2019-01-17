@@ -73,7 +73,7 @@ makeHeader();
 };
 allStores[0].render();*/
 
-Store.prototype.render = function(){
+/*Store.prototype.render = function(){
     //Push data to table rows
     var tableBody = document.getElementById(this.location);
     var tdEl = document.createElement('td');
@@ -89,6 +89,26 @@ Store.prototype.render = function(){
     tdEl = document.createElement('td');
     tdEl.textContent = this.totalSales;
     tableBody.appendChild(tdEl);
+};*/
+
+Store.prototype.render = function(){
+    //Push data to table rows
+    var tbEl = document.getElementById('table');
+    var trEl = document.createElement('tr');
+    trEl.textContent = this.location;
+    var tdEl = document.createElement('td');
+    tdEl.textContent = this.location;
+    trEl.appendChild(tdEl);
+    
+    //Populate trEl with data from allStores
+    for(var j=0; j<hours.length; j++){ 
+        tdEl = document.createElement('td');
+        tdEl.textContent = this.hourlySales[j];
+        trEl.appendChild(tdEl);
+    }
+    tdEl = document.createElement('td');
+    tdEl.textContent = this.totalSales;
+    trEl.appendChild(tdEl);
 };
 
 //Create loop to render each store
@@ -121,6 +141,39 @@ function makeFooter(){
     footerTr.appendChild(tdEl);
 }
 makeFooter();
+
+//Function for the event handler for comment submission
+function handleInput(event){
+    //Prevents page reload after submission
+    event.preventDefault();
+
+    //Get input values from form
+    var location = document.getElementById('sales-form').elements['location'].value;
+    var minCust = document.getElementById('sales-form').elements['minCust'].value;
+    var maxCust = document.getElementById('sales-form').elements['maxCust'].value;
+    var avgSale = document.getElementById('sales-form').elements['avgSale'].value;
+    console.log(location);
+    console.log(minCust);
+    console.log(maxCust);
+    console.log(avgSale);
+
+    //Ensure all form fields are filled out
+    if(!event.target.location.value || !event.target.minCust.value || !event.target.maxCust.value || !event.target.avgSale.value){
+        alert('Form fields cannot be empty!');
+    }
+
+    new Store(location, minCust, maxCust, avgSale);
+    allStores[allStores.length-1].render();
+
+    event.target.location.value = null;
+    event.target.minCust.value = null;
+    event.target.maxCust.value = null;
+    event.target.avgSale.value = null;
+}
+
+var submitForm = document.getElementById('sales-form');
+submitForm.addEventListener('submit', handleInput);
+
 
 /*
 var pike = {

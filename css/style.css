@@ -63,17 +63,15 @@ table{
 tr{
     text-align: center;
     margin: 50px;
+    padding: 5px;
     color: black;
     background-color:lightblue;
-}
-
-td{
-    padding: 5px;
     border: 2px solid black;
 }
 
-.tableHead{
-    font-weight: bold;
+td{
+    padding: 6px;
+    border: 2px solid black;
 }
 
 .grid{

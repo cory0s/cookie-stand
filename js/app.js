@@ -2,6 +2,10 @@
 
 var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
 var allStores = [];
+var tableHead = document.getElementById('tableHead');
+var tableBody = document.getElementById('tableBody');
+var tableFoot = document.getElementById('tableFoot');
+var submitForm = document.getElementById('sales-form');
 
 //Function creates random number for customers
 function getRandomCustomers(min, max){
@@ -27,82 +31,106 @@ function Store(location, minCust, maxCust, avgSale){
     allStores.push(this);
 }
 
-new Store('1st and Pike', 23, 65, 6.3);
-new Store('SeaTac Airport', 3, 24, 1.2);
-new Store('Seattle Center', 11, 38, 3.7);
-new Store('Capitol Hill', 20, 38, 2.3);
-new Store('Alki Beach', 2, 16, 4.6);
-
 //Write function to create table header
 function makeHeader(){
-    var headerTr = document.getElementById('tableHead');
+    var trEl = document.createElement('tr');
     var tdEl = document.createElement('td');
     tdEl.textContent = null;
-    headerTr.appendChild(tdEl);
+    trEl.appendChild(tdEl);
+    tableHead.appendChild(trEl);
 
     for(var i=0; i<hours.length; i++){
         tdEl = document.createElement('td');
         tdEl.textContent = hours[i];
-        tableHead.appendChild(tdEl);
+        trEl.appendChild(tdEl);
+        tableHead.appendChild(trEl);
     }
     tdEl = document.createElement('td');
     tdEl.textContent = 'Daily Location Total';
-    headerTr.appendChild(tdEl);
+    trEl.appendChild(tdEl);
+    tableHead.appendChild(trEl);
 }
-makeHeader();
 
 //Write function to create tabular data
-/*Store.prototype.render = function(){
-    for(var i=0; i<allStores.length; i++){
-        var currentStore = allStores[i];
-        //Push data to table rows
-        var tdEl = document.createElement('td');
-        tdEl.textContent = currentStore.location;
-        domId[i].appendChild(tdEl);
-        
-        //Populate trEl with data from allStores
-        for(var j=0; j<hours.length; j++){ 
-            tdEl = document.createElement('td');
-            tdEl.textContent = currentStore.hourlySales[j];
-            domId[i].appendChild(tdEl);
-        }
-        tdEl = document.createElement('td');
-        tdEl.textContent = currentStore.totalSales;
-        domId[i].appendChild(tdEl);
-    }
-};
-allStores[0].render();*/
-
 Store.prototype.render = function(){
     //Push data to table rows
-    var tableBody = document.getElementById(this.location);
+    var trEl = document.createElement('tr');
     var tdEl = document.createElement('td');
     tdEl.textContent = this.location;
-    tableBody.appendChild(tdEl);
-    
+    trEl.appendChild(tdEl);
+    tableBody.appendChild(trEl);
+
     //Populate trEl with data from allStores
-    for(var j=0; j<hours.length; j++){ 
-        tdEl = document.createElement('td');
+    for(var j=0; j<hours.length; j++){
+        tdEl = document.createElement('td')
         tdEl.textContent = this.hourlySales[j];
-        tableBody.appendChild(tdEl);
+        trEl.appendChild(tdEl);
+        tableBody.appendChild(trEl);
     }
-    tdEl = document.createElement('td');
+    tdEl = document.createElement('td')
     tdEl.textContent = this.totalSales;
-    tableBody.appendChild(tdEl);
+    trEl.appendChild(tdEl);
+    tableBody.appendChild(trEl);
 };
 
-//Create loop to render each store
-for(var i=0; i<allStores.length; i++){
-    allStores[i].render();
+//Function for the event handler for comment submission
+function handleInput(event){
+    var fieldsEmpty = true;
+    var negativeInput = true;
+    var minMax = false;
+
+    //Prevents page reload after submission
+    event.preventDefault();
+
+    //Get input values from form
+    var location = document.getElementById('sales-form').elements['location'].value;
+    var minCust = document.getElementById('sales-form').elements['minCust'].value;
+    var maxCust = document.getElementById('sales-form').elements['maxCust'].value;
+    var avgSale = document.getElementById('sales-form').elements['avgSale'].value;
+
+    //Ensure all form fields are filled out
+    if(event.target.minCust.value < 0 || event.target.maxCust.value <0 || event.target.avgSale.value < 0){
+        alert('Input numbers must be positive.');
+    } else {
+        negativeInput = false;
+    }
+    
+    if(!event.target.location.value || !event.target.minCust.value || !event.target.maxCust.value || !event.target.avgSale.value){
+        alert('Form fields cannot be empty!');
+    } else {
+        fieldsEmpty = false;
+    }
+
+    if(minCust>maxCust){
+        alert('Minimum customer input must be smaller than maximum customers input')
+    } else {
+        minMax = true;
+    }
+
+    //Create new store w/ input data and add to allStores
+    if(negativeInput === false && fieldsEmpty === false && minMax === true){
+        new Store(location, minCust, maxCust, avgSale);
+        allStores[allStores.length-1].render();
+        var tableFoot = document.getElementById('tableFoot');
+        tableFoot.innerHTML = '';
+        makeFooter();
+    }
+
+    event.target.location.value = null;
+    event.target.minCust.value = null;
+    event.target.maxCust.value = null;
+    event.target.avgSale.value = null;
 }
+submitForm.addEventListener('submit', handleInput);
 
 //Write function to create footer
 function makeFooter(){
-    var footerTr = document.getElementById('tableFoot');
     var dailyTotal = 0;
+    var trEl = document.createElement('tr');
     var tdEl = document.createElement('td');
     tdEl.textContent = 'Totals';
-    footerTr.appendChild(tdEl);
+    trEl.appendChild(tdEl);
+    tableFoot.appendChild(trEl);
 
     for(var i=0; i<hours.length; i++){
         var hourlyTotal = 0;
@@ -113,13 +141,31 @@ function makeFooter(){
         }
         tdEl = document.createElement('td');
         tdEl.textContent = hourlyTotal;
-        footerTr.appendChild(tdEl);
+        trEl.appendChild(tdEl);
+        tableFoot.appendChild(trEl);
         dailyTotal = dailyTotal + hourlyTotal;
     }
     tdEl = document.createElement('td');
     tdEl.textContent = dailyTotal;
-    footerTr.appendChild(tdEl);
+    trEl.appendChild(tdEl);
+    tableFoot.appendChild(trEl);
 }
+
+makeHeader();
+
+new Store('1st and Pike', 23, 65, 6.3);
+new Store('SeaTac Airport', 3, 24, 1.2);
+new Store('Seattle Center', 11, 38, 3.7);
+new Store('Capitol Hill', 20, 38, 2.3);
+new Store('Alki Beach', 2, 16, 4.6);
+
+//Create loop to render each store
+function renderStores(){
+    for(var i=0; i<allStores.length; i++){
+        allStores[i].render();
+    }
+}
+renderStores();
 makeFooter();
 
 /*

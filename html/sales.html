@@ -4,41 +4,43 @@
         <title>Salmon Cookies</title>
         <link rel="stylesheet" href="../css/reset.css">
         <link rel="stylesheet" href="../css/style.css">
-        <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
     </head>
 
     <body>
-        <header>
+        <header class="mainHeader">
             <h1>Seattle Area Salmon Cookie Sales</h1>
             <img src = "../img/salmon.png">
         </header>
+        
+        <main>
+            <form id="sales-form">
+                <fieldset>
+                    <legend>Cookie Sales Form</legend>
 
-        <form id="sales-form">
-            <fieldset>
-                <legend>Cookie Sales Form</legend>
+                    <label for="location">Store Location: </label>
+                    <input name="location", type="text", size="40"/>
+                    
+                    <label for="minCust">Min. Number Customers: </label>
+                    <input name="minCust", type="number"/>
 
-                <label for="location">Store Location: </label>
-                <input name="location", type="text", size="40"/>
-                
-                <label for="minCust">Min. Number Customers: </label>
-                <input name="minCust", type="number"/>
+                    <label for="maxCust">Max. Number Customers: </label>
+                    <input name="maxCust", type="number"/>
 
-                <label for="maxCust">Max. Number Customers: </label>
-                <input name="maxCust", type="number"/>
+                    <label for="avgSale">Avg. Cookie Sale: </label>
+                    <input name="avgSale", type="number"/>
 
-                <label for="avgSale">Avg. Cookie Sale: </label>
-                <input name="avgSale", type="number"/>
+                    <button type="Submit" name="submit">Add to table</button>
 
-                <button type="Submit" name="submit">Add to table</button>
+                </fieldset>
+            </form>
 
-            </fieldset>
-        </form>
-
-        <table id="table">
-            <thead id="tableHead"></thead>
-            <tbody id="tableBody"></tbody>
-            <tfoot id="tableFoot"></tfoot>
-        </table>
+            <table id="table">
+                <thead id="tableHead"></thead>
+                <tbody id="tableBody"></tbody>
+                <tfoot id="tableFoot"></tfoot>
+            </table>
+        </main>
 
         <script src="../js/app.js"></script>
         

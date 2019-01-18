@@ -1,16 +1,28 @@
 header{
-    background: lightskyblue;
     text-align: center;
+    border: double 10px black;
+    border-style: groove;
+    border-color: grey;
+    border-width: 20px;
+    padding: 30px;
+    color: #999;
+}
+
+.mainHeader{
+    background-image: url("../img/underwater.jpg");
 }
 
 body{
+    background: tan;
+}
+main{
     background: tan;
     border: solid 2px black;
 }
 
 h1{
-    font-size: 70px;
-    font-family: 'Acme', sans-serif; 
+    font-size: 50px;
+    font-family: 'Special Elite', cursive;
 }
 
 h2{
@@ -46,7 +58,6 @@ ul{
 img{
     max-width: 90%;
     max-height: 90%;
-    border: double 2px black;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -85,7 +96,7 @@ td{
     border: solid 2px black;
     float: left;
     margin: 10px;
-    background-color: lightskyblue;
+    background-color: teal;
 }
 
 .col-1-3{
@@ -94,5 +105,5 @@ td{
     border: solid 2px black;
     float: left;
     margin: 10px;
-    background-color: lightskyblue;
+    background-color: teal;
 }
